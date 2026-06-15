@@ -97,19 +97,3 @@ Add screenshots of:
 - Verify Signature Page
 
 ---
-
-## 👩‍💻 Author
-
-**Ruta Kakadiya**
-
-Python & Web Development Enthusiast
-
-GitHub: https://github.com/yourusername
-
-LinkedIn: Add Your LinkedIn Profile
-
----
-
-## 📄 License
-
-This project is developed for educational and learning purposes.
