@@ -44,25 +44,6 @@ signature-project/
 ├── style.css
 │
 └── README.md
-```
-
----
-
-## ▶️ How to Run
-
-### Method 1
-
-1. Download or clone the project.
-2. Open the project folder.
-3. Open `login.html` in your browser.
-
-### Method 2 (VS Code)
-
-1. Open the project in VS Code.
-2. Install the Live Server extension.
-3. Right-click on `login.html`.
-4. Click **Open with Live Server**.
-
 ---
 
 ## 📋 Workflow
