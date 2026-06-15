@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard - Signature System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    display:flex;
+    height:100vh;
+    background:linear-gradient(135deg,#1d2671,#c33764);
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:240px;
+    background:#1e1e2f;
+    color:white;
+    padding:20px;
+}
+
+.sidebar h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.sidebar a{
+    display:block;
+    padding:12px;
+    margin:10px 0;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    transition:0.3s;
+}
+
+.sidebar a:hover{
+    background:#34344a;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    padding:20px;
+}
+
+/* TOP BAR */
+.topbar{
+    background:rgba(255,255,255,0.1);
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+    color:white;
+    backdrop-filter: blur(10px);
+}
+
+/* CARDS */
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* CANVAS */
+canvas{
+    border:2px dashed #ccc;
+    border-radius:10px;
+    background:#fff;
+}
+
+/* BUTTONS */
+button{
+    padding:10px 15px;
+    margin:10px 5px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:500;
+}
+
+.verify{background:#00c9a7;color:white;}
+.clear{background:#ff6b6b;color:white;}
+.nav{background:#6c5ce7;color:white;}
+
+/* STATUS */
+.status{
+    margin-top:10px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>✍ SignSys</h2>
+    <a href="#">🏠 Dashboard</a>
+    <a href="#" onclick="goSave()">💾 Save Signature</a>
+    <a href="#" onclick="goVerify()">✔ Verify Signature</a>
+    <a href="#" onclick="logout()">🚪 Logout</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+        <h2>Welcome, <span id="user"></span> 👋</h2>
+        <p>Real-Time Signature Verification System</p>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="card">
+        <h3>Quick Actions</h3>
+        <button class="nav" onclick="goSave()">Save Signature</button>
+        <button class="nav" onclick="goVerify()">Verify Signature</button>
+    </div>
+
+    <!-- VERIFY SECTION -->
+    <div class="card">
+        <h3>Draw Signature to Verify</h3>
+
+        <canvas id="verify-pad" width="400" height="150"></canvas>
+        <br>
+
+        <button class="verify" onclick="verifyDashboard()">Verify</button>
+        <button class="clear" onclick="clearPad()">Clear</button>
+
+        <div class="status" id="status"></div>
+    </div>
+
+    <!-- SAVED SIGNATURE -->
+    <div class="card">
+        <h3>Saved Signature</h3>
+        <img id="savedImg" width="200"/>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+<script>
+const canvas = document.getElementById("verify-pad");
+const pad = new SignaturePad(canvas);
+
+// USER
+const username = localStorage.getItem("currentUser");
+document.getElementById("user").innerText = username;
+
+// LOAD SAVED SIGNATURE
+const saved = localStorage.getItem(username);
+if(saved){
+    document.getElementById("savedImg").src = saved;
+}
+
+// CLEAR
+function clearPad(){
+    pad.clear();
+}
+
+// VERIFY
+function verifyDashboard(){
+    const newSign = pad.toDataURL();
+    const savedSign = localStorage.getItem(username);
+
+    if(newSign === savedSign){
+        document.getElementById("status").innerHTML = "✅ Verified Successfully";
+        document.getElementById("status").style.color = "green";
+    }else{
+        document.getElementById("status").innerHTML = "❌ Signature Not Matched";
+        document.getElementById("status").style.color = "red";
+    }
+}
+
+// NAVIGATION
+function goSave(){
+    window.location = "save.html";
+}
+
+function goVerify(){
+    window.location = "verify.html";
+}
+
+// LOGOUT
+function logout(){
+    localStorage.removeItem("currentUser");
+    window.location = "login.html";
+}
+</script>
+
+</body>
+</html>

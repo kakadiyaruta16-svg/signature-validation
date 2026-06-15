@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Verify</title>
+<style>
+body {
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    color:white;text-align:center;font-family:Arial;
+}
+canvas {background:white;border-radius:10px;}
+button {padding:10px;margin:5px;}
+</style>
+</head>
+
+<body>
+
+<h2>Verify Signature / Thumb</h2>
+
+<canvas id="pad" width="300" height="150"></canvas><br>
+
+<button onclick="verify()">Verify Signature</button>
+<button onclick="thumb()">Use Thumb</button>
+
+<h3 id="result"></h3>
+
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+<script>
+const pad = new SignaturePad(document.getElementById("pad"));
+
+function verify(){
+    let user = localStorage.getItem("currentUser");
+    let saved = localStorage.getItem(user+"_sign");
+    let newSign = pad.toDataURL();
+
+    if(saved === newSign){
+        result.innerHTML="✅ Valid Signature";
+    } else {
+        result.innerHTML="❌ Invalid Signature";
+    }
+}
+
+// Thumb option (for non-educated users)
+function thumb(){
+    result.innerHTML="👍 Thumb Accepted (Alternative Verification)";
+}
+</script>
+
+</body>
+</html>

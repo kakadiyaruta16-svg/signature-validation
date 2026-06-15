@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Save Signature</title>
+<style>
+body {
+    background: linear-gradient(135deg,#43cea2,#185a9d);
+    text-align:center;color:white;font-family:Arial;
+}
+canvas {background:white;border-radius:10px;}
+</style>
+</head>
+
+<body>
+
+<h2>Save Signature & Photo</h2>
+
+<canvas id="pad" width="300" height="150"></canvas><br>
+<button onclick="save()">Save Signature</button>
+<button onclick="clearPad()">Clear</button>
+
+<br><br>
+
+<input type="file" id="photo">
+
+<br><br>
+<button onclick="next()">Next</button>
+
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+<script>
+const pad = new SignaturePad(document.getElementById("pad"));
+
+function clearPad(){ pad.clear(); }
+
+function save(){
+    let user = localStorage.getItem("currentUser");
+    let sign = pad.toDataURL();
+
+    localStorage.setItem(user+"_sign", sign);
+
+    let file = photo.files[0];
+    let reader = new FileReader();
+
+    reader.onload = function(){
+        localStorage.setItem(user+"_photo", reader.result);
+    }
+    if(file) reader.readAsDataURL(file);
+
+    alert("Saved!");
+}
+
+function next(){
+    window.location="verify.html";
+}
+function next(){
+    alert("Saved Successfully");
+
+    // 👉 Go back to dashboard
+    window.location = "dashboard.html";
+}
+</script>
+
+</body>
+</html>

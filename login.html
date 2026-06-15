@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins';}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    overflow:hidden;
+}
+
+/* Background circles */
+body::before, body::after{
+    content:"";
+    position:absolute;
+    width:300px;height:300px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.1);
+}
+body::before{ top:-50px; left:-50px; }
+body::after{ bottom:-50px; right:-50px; }
+
+/* Card */
+.container{
+    width:350px;
+    padding:30px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    text-align:center;
+    color:white;
+}
+
+h2{margin-bottom:15px;}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-top:12px;
+    border:none;
+    border-radius:8px;
+    outline:none;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    background:#ffd93d;
+    cursor:pointer;
+    font-weight:600;
+}
+
+a{
+    display:block;
+    margin-top:10px;
+    color:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🔐 Login</h2>
+
+    <input type="text" id="user" placeholder="Username">
+    <input type="password" id="pass" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <a href="register.html">Create Account</a>
+</div>
+
+<script>
+function login(){
+    let u=user.value, p=pass.value;
+    if(localStorage.getItem(u)===p){
+        localStorage.setItem("currentUser",u);
+        window.location="save.html";
+    } else alert("Invalid Login");
+}
+   
+function login(){
+    let u = user.value;
+    let p = pass.value;
+
+    if(localStorage.getItem(u) === p){
+        localStorage.setItem("currentUser", u);
+
+        // 👉 Go to dashboard
+        window.location = "dashboard.html";
+    } else {
+        alert("Invalid Login");
+    }
+}
+</script>
+
+
+<div class="top-header">
+    <h1>Real-Time Signature Detection & Validation System</h1>
+    <p>Secure Authentication using Signature & AI Verification</p>
+</div>
+
+<div class="container">
+    <h2>🔐 Login</h2>
+</div>
+</body>
+</html>
