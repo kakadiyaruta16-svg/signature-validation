@@ -85,15 +85,3 @@ signature-project/
 - Admin Analytics Dashboard
 
 ---
-
-## 📸 Screenshots
-
-Add screenshots of:
-
-- Login Page
-- Registration Page
-- Dashboard
-- Save Signature Page
-- Verify Signature Page
-
----
